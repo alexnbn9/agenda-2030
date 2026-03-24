@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AGENDA 2030 | CICU ALEXANDRO LORENZO</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Inter:wght@100;300;600&family=Syncopate:wght@700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #050508;
+            --accent-gold: #c5a677;
+            --accent-glow: rgba(197, 166, 115, 0.4);
+            --text-silver: #e0e0e0;
+        }
+
+        .reveal {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Cinematic Background Elements to fill space */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--border-soft) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: -2;
+        }
+
+        .fog-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #0a0a0f 0%, #050508 100%);
+        }
+
+        .fog-layer {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('https://www.transparenttextures.com/patterns/dust.png');
+            opacity: 0.05;
+            animation: drift 100s infinite linear;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate(-25%, -25%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        .light-leak {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(197, 166, 115, 0.1) 0%, transparent 60%);
+            z-index: 100;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 900 !important;
+            text-transform: none !important;
+            letter-spacing: -1px !important;
+        }
+
+        .oval-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(50px);
+            border-radius: 80px;
+            padding: 3.5rem;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 100px;
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            font-family: 'Syncopate', sans-serif;
+            background: var(--accent-gold);
+            color: #000;
+        }
+
+        .pill-fail {
+            background: rgba(255, 77, 77, 0.2);
+            color: #ff6e6e;
+            border: 1px solid #ff4d4d;
+        }
+
+        .pill-success {
+            background: rgba(0, 255, 163, 0.2);
+            color: #00ffa3;
+            border: 1px solid #00ffa3;
+        }
+
+        .big-title {
+            font-size: 4.5em;
+            line-height: 1.1;
+            margin-bottom: 0.5em;
+        }
+
+        .italic-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 400;
+            opacity: 0.7;
+            font-size: 1.4em;
+        }
+
+        /* Full-Width Luxury Table */
+        .luxury-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 20px;
+            margin-top: 1.5rem;
+        }
+
+        .luxury-table td {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 2.5rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: top;
+            font-size: 0.7em;
+            width: 50%;
+        }
+
+        .luxury-table h3 {
+            font-size: 1.3em;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+        }
+
+        .luxury-table p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Large Background Text for 'Empty' Slides */
+        .bg-text {
+            position: absolute;
+            font-size: 15em;
+            font-weight: 900;
+            opacity: 0.03;
+            z-index: -1;
+            white-space: nowrap;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .cursor-reveal {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--accent-gold);
+            border-radius: 50%;
+            position: fixed;
+            z-index: 10000;
+            pointer-events: none;
+            transition: transform 0.1s ease;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Print Support: Keeps the dark theme in PDF */
+        @media print {
+            .reveal {
+                background-color: #050508 !important;
+            }
+
+            .reveal .slides section {
+                background-color: #050508 !important;
+                color: #e0e0e0 !important;
+            }
+
+            .oval-card {
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            }
+
+            .bg-text {
+                display: none;
+            }
+
+            /* Hide the decorative background text to keep the PDF readable */
+            h1,
+            h2,
+            h3 {
+                color: #c5a677 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor-reveal"></div>
+    <div class="light-leak"></div>
+    <div class="bg-grid"></div>
+    <div class="fog-container">
+        <div class="fog-layer"></div>
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Intro (Full) -->
+            <section data-background-color="#000">
+                <div class="bg-text">LORENZO</div>
+                <div style="text-align: center;">
+                    <p
+                        style="letter-spacing: 12px; text-transform: uppercase; font-size: 0.5em; opacity: 0.6; margin-bottom: 2rem;">
+                        Un Progetto Scolastico di</p>
+                    <h1 style="color: var(--accent-gold); font-size: 3.5em; margin: 0;">CICU ALEXANDRO LORENZO</h1>
+                    <div style="width: 60px; height: 1px; background: #fff; margin: 3rem auto; opacity: 0.3;"></div>
+                    <p style="font-size: 0.7em; letter-spacing: 5px; opacity: 0.5;">AGENDA 2030 | L'ARTE DI NON SPRECARE
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 2: Title (Full) -->
+            <section data-auto-animate>
+                <div class="bg-text">2030</div>
+                <p class="italic-sub">Come salvare il nostro futuro</p>
+                <h1 class="big-title" style="font-size: 5em;">Cibo e Risorse:<br><span
+                        style="color: var(--accent-gold);">Analisi e Soluzioni.</span></h1>
+                <div
+                    style="display: flex; justify-content: center; gap: 50px; margin-top: 3rem; font-size: 0.6em; opacity: 0.5;">
+                    <span>✓ SCUOLA</span>
+                    <span>✓ LAVORO</span>
+                    <span>✓ CASA</span>
+                </div>
+            </section>
+
+            <!-- Slide 3: The Problem (Full) -->
+            <section data-auto-animate>
+                <div class="bg-text">SPRECO</div>
+                <h2 class="italic-sub" style="font-size: 1.8em;">Gettiamo via troppa roba</h2>
+                <h1 style="font-size: 10em; margin: 0; color: #fff; line-height: 1;">1.3 MLD</h1>
+                <p style="font-size: 1.5em; color: var(--accent-gold); margin-top: -0.5em;">Tonnellate di cibo sprecate
+                    ogni anno.</p>
+
+                <div class="oval-card"
+                    style="margin-top: 3rem; padding: 2.5rem; background: rgba(226, 177, 101, 0.05); border-color: var(--accent-gold);">
+                    <p style="font-size: 0.8em; line-height: 1.8;">
+                        L'Obiettivo 12 dell'Agenda 2030 ci dice che non possiamo più andare avanti così. <br>
+                        È ora di imparare a usare bene quello che abbiamo, sia al lavoro che a casa.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Slide 4: Sala e Vendita 1 (Full) -->
+            <section data-background-color="#07070a">
+                <div class="bg-text" style="font-size: 10em;">LAVORO</div>
+                <div style="text-align: left; margin-bottom: 2rem;">
+                    <span class="status-pill">NEL MONDO DEL LAVORO</span>
+                    <h2 style="font-size: 3em; margin: 0;">Settore Sala e Vendita</h2>
+                    <p class="italic-sub" style="font-size: 1em;">Piccoli cambiamenti per grandi risultati.</p>
+                </div>
+
+                <table class="luxury-table">
+                    <tr>
+                        <td>
+                            <span class="status-pill pill-fail" style="background: none;">ERRORE</span>
+                            <h3>FARE TAVOLI TROPPO PRESTO</h3>
+                            <p>Mettere pane, acqua e cibo sui tavoli prima che i clienti si siedano. Tutto quello che
+                                avanza dovrà essere buttato per legge.</p>
+                        </td>
+                        <td>
+                            <span class="status-pill pill-success" style="background: none;">SOLUZIONE</span>
+                            <h3>SERVIRE SOLO QUANDO SERVE</h3>
+                            <p>Chiedere al cliente cosa vuole e portarlo al momento giusto. Così nulla finisce nel
+                                cestino e il cibo è sempre fresco.</p>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Slide 5: Sala e Vendita 2 (Full) -->
+            <section data-background-color="#07070a">
+                <div class="bg-text" style="font-size: 10em;">SALA</div>
+                <table class="luxury-table">
+                    <tr>
+                        <td>
+                            <span class="status-pill pill-fail" style="background: none;">ERRORE</span>
+                            <h3>NON PARLARSI MAI</h3>
+                            <p>Se chi serve in sala non parla con chi cucina, non si sa mai quanto cibo avanza. Si
+                                rischia di cucinare troppo e buttare tutto.</p>
+                        </td>
+                        <td>
+                            <span class="status-pill pill-success" style="background: none;">SOLUZIONE</span>
+                            <h3>USARE TABLET E APP</h3>
+                            <p>Vedere subito sul computer o sul tablet cosa c'è in frigo. Così possiamo consigliare i
+                                piatti giusti ai clienti ed evitare sprechi.</p>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Slide 6: Sala e Vendita 3 (Full) -->
+            <section data-background-color="#07070a">
+                <div class="bg-text" style="font-size: 10em;">RICICLO</div>
+                <table class="luxury-table" style="margin-top: 5rem;">
+                    <tr>
+                        <td>
+                            <span class="status-pill pill-fail" style="background: none;">ERRORE</span>
+                            <h3>BUTTARE TUTTO INSIEME</h3>
+                            <p>In molti bar e ristoranti si butta tutto in un unico sacco per fare prima. Plastica,
+                                vetro e cibo finiscono tutti nello stesso posto.</p>
+                        </td>
+                        <td>
+                            <span class="status-pill pill-success" style="background: none;">SOLUZIONE</span>
+                            <h3>POSTAZIONI PER IL RICICLO</h3>
+                            <p>Creare degli spazi comodi dietro il bancone con bidoni separati. Dividere bene i
+                                materiali è il primo passo per non inquinare.</p>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Slide 7: Vita Quotidiana 1 (Full) -->
+            <section>
+                <div class="bg-text" style="font-size: 10em;">CASA</div>
+                <div class="oval-card">
+                    <span class="status-pill">A CASA NOSTRA</span>
+                    <h2 style="font-size: 3em; margin-bottom: 2rem;">Vita di ogni Giorno</h2>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                        <div style="text-align: left;">
+                            <span class="status-pill pill-fail" style="background: none;">ERRORE</span>
+                            <h3 style="font-size: 1.3em; margin-bottom: 1rem;">SPESA SENZA PENSARE</h3>
+                            <p style="font-size: 0.8em; opacity: 0.8;">Comprare troppa roba senza fare una lista. Molti
+                                cibi scadono in frigo perché ci dimentichiamo di averli comprati.</p>
+                        </div>
+                        <div style="text-align: left;">
+                            <span class="status-pill pill-success" style="background: none;">SOLUZIONE</span>
+                            <h3 style="font-size: 1.3em; margin-bottom: 1rem;">ORGANIZZARE I PASTI</h3>
+                            <p style="font-size: 0.8em; opacity: 0.8;">Controllare cosa c'è in frigo e fare una lista
+                                prima di andare al supermercato. Si compra solo quello che serve davvero.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Vita Quotidiana 2 (Full) -->
+            <section>
+                <div class="bg-text" style="font-size: 10em;">CIBO</div>
+                <div class="oval-card" style="border-color: var(--accent-gold);">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                        <div style="text-align: left;">
+                            <span class="status-pill pill-fail" style="background: none;">ERRORE</span>
+                            <h3 style="font-size: 1.3em; margin-bottom: 1rem;">SCARTARE IL CIBO "BRUTTO"</h3>
+                            <p style="font-size: 0.8em; opacity: 0.8;">Non comprare o buttare frutta e verdura solo
+                                perché non è perfetta esteticamente. Spesso la roba brutta è la più buona.</p>
+                        </div>
+                        <div style="text-align: left;">
+                            <span class="status-pill pill-success" style="background: none;">SOLUZIONE</span>
+                            <h3 style="font-size: 1.3em; margin-bottom: 1rem;">CUCINARE TUTTO</h3>
+                            <p style="font-size: 0.8em; opacity: 0.8;">Usare anche le parti meno belle per fare sughi,
+                                minestroni o marmellate. In cucina non si butta via niente!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Il Giro del Riciclo (Full) -->
+            <section data-background-color="#000">
+                <div class="bg-text" style="font-size: 10em;">LOOP</div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 60px;">
+                    <div
+                        style="position: relative; width: 400px; height: 400px; border: 2px solid var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: drift 30s infinite linear;">
+                        <div style="text-align: center;">
+                            <h1 style="font-size: 4em; margin: 0; color: var(--accent-gold);">LOOP</h1>
+                            <p style="font-size: 0.6em; opacity: 0.5;">IL GIRO INFINITO</p>
+                        </div>
+                    </div>
+                    <div style="text-align: left; max-width: 450px;">
+                        <h2 style="font-size: 2em; margin-bottom: 2rem;">Non buttare, ricrea!</h2>
+                        <ul style="list-style: none; font-size: 0.8em; line-height: 2.5;">
+                            <li style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;"><b>1.
+                                    USA</b>: Usa la risorsa con rispetto.</li>
+                            <li style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;"><b>2.
+                                    DIVIDI</b>: Separa bene i materiali a casa e al lavoro.</li>
+                            <li><b>3. RICICLA</b>: Trasforma il rifiuto in qualcosa di nuovo.</li>
+                        </ul>
+                        <p style="font-size: 0.6em; margin-top: 2rem; opacity: 0.6; font-style: italic;">"In natura
+                            nulla sparisce, tutto si trasforma in un tesoro."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: Call to Action -->
+            <section data-auto-animate>
+                <div class="bg-text">ACTION</div>
+                <h2 class="italic-sub" style="opacity: 0.5;">Il futuro non aspetta.</h2>
+                <h1 class="big-title" style="font-size: 12em; margin: 0; color: var(--accent-gold);">ORA.</h1>
+                <p style="letter-spacing: 20px; font-weight: 100; opacity: 0.5; font-size: 0.6em;">CAMBIA LE TUE
+                    ABITUDINI</p>
+                <div style="margin-top: 6rem; font-size: 0.6em; opacity: 0.3;">
+                    AGENDA 2030 | PRODUZIONE CICU ALEXANDRO | 2026
+                </div>
+            </section>
+
+            <!-- Slide 11: Credits -->
+            <section data-background-color="#000">
+                <div class="bg-text">FINE</div>
+                <h1 style="color: var(--accent-gold); font-size: 4em;">GRAZIE.</h1>
+                <div style="width: 60px; height: 1px; background: #fff; margin: 3rem auto; opacity: 0.2;"></div>
+                <p style="font-size: 1.2em; letter-spacing: 2px;">Cicu Alexandro Lorenzo</p>
+                <div style="margin-top: 4rem;">
+                    <p style="font-size: 0.5em; opacity: 0.4;">Fonti: FAO / Agenda 2030 / Legambiente</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const cursor = document.querySelector('.cursor-reveal');
+        document.addEventListener('mousemove', e => {
+            gsap.to(cursor, { x: e.clientX - 15, y: e.clientY - 20, duration: 0.1 });
+            document.documentElement.style.setProperty('--x', e.clientX + 'px');
+            document.documentElement.style.setProperty('--y', e.clientY + 'px');
+        });
+
+        Reveal.initialize({
+            hash: true,
+            controls: false,
+            progress: true,
+            center: true,
+            transition: 'convex',
+            backgroundTransition: 'zoom',
+            autoAnimateEasing: 'cubic-bezier(0.19, 1, 0.22, 1)',
+            autoAnimateDuration: 1.2
+        });
+
+        // Animations to make slides feel dynamic even when full
+        Reveal.on('slidechanged', event => {
+            gsap.from(event.currentSlide.querySelectorAll('h1, h2, table, .oval-card, .bg-text'), {
+                y: 50,
+                filter: "blur(10px)",
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.1,
+                ease: "expo.out"
+            });
+        });
+    </script>
+</body>
+
+</html>
